@@ -22,7 +22,8 @@
 ## Getting Started
 
 ### Prerequisites
-- **Node.js** (v14 or higher)
+- **Node.js**
+- **React.js**
 - A package manager like **npm** or **yarn**
 
 ### Installation
