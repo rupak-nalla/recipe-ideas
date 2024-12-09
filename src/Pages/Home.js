@@ -53,72 +53,114 @@ function App() {
   }, []);
   
   return (
+
     <div className="App">
+      {/* Header Section */}
       <header className="App-header">
-        <nav class="bg-[#112637] border-gray-200 flex items-center">
-          <img src={logo} class="h-10" alt='Logo'/>
-          <div class="max-w-screen-xl flex flex-wrap items-center  p-4">
-            <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap text-[#f7f0d6]">Kitchen Genie</span>
-            </div>
+        <nav className="bg-[#112637] border-gray-200 flex items-center px-8 py-4">
+          <img src={logo} className="h-10" alt="Logo" />
+          <div className="flex items-center space-x-3 ml-4">
+            <span className="text-2xl font-semibold text-[#f7f0d6]">
+              Kitchen Genie
+            </span>
           </div>
         </nav>
       </header>
-      <main className=' h-[500px] '>
-        {/* hero section */}
 
-        <div className='text-center bg-[url(Image.png)] w-[100%] h-[100%]'id='hero-section ' >
-          <div className='bg-gradient-to-t from-black/80 via-transparent to-black/80 h-[100%] w-[100%] flex justify-center items-center'>
-            <div>
-              <h3 className='font-bold text-5xl text-white leading-snug'>Discover Your Next Meal</h3>
-              <p className='text-white leading-snug'>Effortlessly discover new and delicious meals.</p>
-                <div className='m-10 h-9 flex'>
-                  <input type='text' id='search' className='w-[500px] h-[100%] px-5 rounded-s-xl focus:outline-none' placeholder='Search recipes by main ingredient or name...'></input>
-                  <button className='bg-white text-black h-[100%] px-5 rounded-e-xl focus:outline-none' onClick={()=>{Search();}}>
-                    <svg class="w-6 h-[100%] text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                    </svg>
-
-                  </button>
-                </div>
-              </div>
-          </div>
+      {/* Main Content */}
+      <main >
+        {/* Hero Section */}
+        <div
+          className="text-center w-full h-[400px] sm:h-[500px] bg-[url(Image.png)] bg-cover bg-center lg:h-[80vh] flex items-center justify-center"
+          id="hero-section"
           
+        >
+          
+          <div className="bg-gradient-to-t from-black/50  to-black/50 h-full w-full flex justify-center items-center">
+            <div className="px-6 lg:px-12 sm:px-10 text-center">
+              <h3 className="font-bold text-4xl lg:text-6xl text-white leading-snug">
+                Discover Your Next Meal
+              </h3>
+              <p className="text-white leading-snug text-sm lg:text-lg mt-4">
+                Effortlessly discover new and delicious meals.
+              </p>
+              <div className="mt-8 h-12 flex justify-center">
+                <input
+                  type="text"
+                  id="search"
+                  className="w-72 lg:w-[500px] h-full px-5 rounded-l-md focus:outline-none text-base"
+                  placeholder="Search recipes by main ingredient or name..."
+                />
+                <button
+                  className="bg-white text-black h-full px-6 rounded-r-md flex items-center justify-center"
+                  onClick={() => Search()}
+                >
+                  <svg
+                    className="w-6 h-6 text-gray-800"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      d="M21 21l-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* featured section */}
-        <div className='p-8 bg-[#112637]'>
-          <div className='row flex justify-center m-3'>
-            <h3 className='text-xl font-sans text-[#f7f0d6]'>Featured Receipes</h3>
-          </div>
-          <div className='flex justify-around'>
-            {
-              featuredMeals.length > 0 ? (
-              featuredMeals.map((meal, index) => (
-                <div onClick={()=>{goToReceipe(meal.idMeal)}} key={index} class="hover:scale-105 hover:duration-100 hover:drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)] max-w-sm bg-[#214861] border border-[#142f40] rounded-lg shadow m-2">
+        {/* Featured Recipes Section */}
+        <div className="p-8 bg-[#112637] sm:p-5">
+          <div className="container mx-auto">
+            <div className="flex justify-center mb-8">
+              <h3 className="text-2xl font-sans text-[#f7f0d6]">
+                Featured Recipes
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredMeals.length > 0 ? (
+                featuredMeals.map((meal, index) => (
                   
-                  <div href="#">
-                      <img class="rounded-t-lg" src={meal.strMealThumb} alt="" />
+                  <div
+                    onClick={() => goToReceipe(meal.idMeal)}
+                    key={index}
+                    className="hover:scale-105 transition-transform duration-200 w-72 h-96 bg-[#214861] border border-[#142f40] rounded-lg shadow-lg mx-auto flex flex-col"
+                  >
+                    <div>
+                      <img
+                        className="rounded-t-lg w-full h-48 object-cover"
+                        src={meal.strMealThumb}
+                        alt={meal.strMeal}
+                      />
+                    </div>
+                    <div className="p-5 flex-grow flex flex-col justify-between">
+                      <h5 className="mb-2 text-lg lg:text-xl font-bold tracking-tight text-[#f7f0d6]">
+                        {meal.strMeal}
+                      </h5>
+                      <button
+                        onClick={() => goToReceipe(meal.idMeal)}
+                        className="mt-auto px-4 py-2 bg-[#f7f0d6] text-[#214861] font-semibold rounded-md hover:bg-[#e2d4ba] transition"
+                      >
+                        View Recipe
+                      </button>
+                    </div>
                   </div>
-                  <div class="p-5">
-                      <div href="#">
-                          <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#f7f0d6] ">{meal.strMeal}</h5>
-                      </div>
-                      
-                  </div>
-                </div>
-              ))
+
+                ))
               ) : (
-                <p>Loading meals...</p>
-              )
-            }
-          
-            
+                <p className="text-center text-[#f7f0d6]">Loading meals...</p>
+              )}
+            </div>
           </div>
-          <div className='row'></div>
         </div>
       </main>
     </div>
+
   );
 }
 

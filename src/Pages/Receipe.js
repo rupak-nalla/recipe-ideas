@@ -53,94 +53,103 @@ function App() {
         fetchMealDetails();
     }, [id]);
     return (
+        
         <div className="App">
             <header className="App-header">
-            <nav class="bg-[#112637] border-gray-200 flex items-center">
-                <img src={logo} class="h-10" alt='Logo'/>
-                <div class="max-w-screen-xl flex flex-wrap items-center  p-4">
-                    <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                        <span class="self-center text-2xl font-semibold whitespace-nowrap text-[#f7f0d6]">Kitchen Genie</span>
+                <nav className="bg-[#112637] border-gray-200 flex items-center px-8 py-4">
+                <img src={logo} className="h-10" alt="Logo" />
+                <div className="flex items-center space-x-3 ml-4">
+                    <span className="text-2xl font-semibold text-[#f7f0d6]">
+                    Kitchen Genie
+                    </span>
+                </div>
+                </nav>
+            </header>
+
+            <main className="min-h-screen">
+                {/* Hero Section */}
+                <div
+                className="text-center w-full h-[400px] sm:h-[500px]"
+                id="hero-section"
+                style={{
+                    backgroundImage: `url(${MealDetails.strMealThumb})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                }}
+                >
+                <div className="bg-gradient-to-t from-black/80 via-transparent to-black/80 h-full w-full flex justify-center items-center">
+                    <div>
+                    <h3 className="font-bold text-3xl sm:text-4xl md:text-5xl text-white leading-snug">
+                        {MealDetails.strMeal}
+                    </h3>
                     </div>
                 </div>
-            </nav>
-            </header>
-            <main className=' min-h-screen'>
-                <div
-                    className="text-center w-[100%] h-[500px] "
-                    id="hero-section"
-                    style={{
-                        backgroundImage: `url(${MealDetails.strMealThumb})`,
-                        backgroundRepeat: 'no-repeat', // Ensures the background does not repeat
-                        backgroundSize: 'cover', // Ensures the image covers the entire area
-                        backgroundPosition: 'center', // Centers the image
-                    }}
-                    >
-                    <div className="bg-gradient-to-t from-black/80 via-transparent to-black/80 h-[100%] w-[100%] flex justify-center items-center">
-                        <div>
-                        <h3 className="font-bold text-5xl text-white leading-snug">{MealDetails.strMeal}</h3>
-                        
-                        </div>
-                    </div>
                 </div>
 
-                <div className='bg-[#112637] p-8 h-auto'>
-                    <div className='row m-10 '>
-                        <h3 className='text-xl font-sans text-center h-5 text-[#f7f0d6]'>Receipe</h3>
-                        {
-                            MealDetails ? (
-                                <div className='w-[100%] m-10 text-[#f7f0d6]'>
-                                    <div className='flex h-auto m-3' id='Recipe-Name'>
-                                        <div className='w-[30%] font-semibold'>Recipe Name</div>
-                                        <div className='w-[70%]'>{MealDetails.strMeal}</div>
-                                    </div>
-                                    <div className='flex h-auto m-3 ' id='Ingridents'>
-                                        <div className='w-[30%] font-semibold'>Ingridents</div>
-                                            <div className='w-[70%]'>
-                                                <div className=''>
-                                                    {
-                                                        MealDetails.ingredients ? (
-                                                            MealDetails.ingredients.map((step, index) => (
-                                                                <>
-                                                                {step}{index < MealDetails.ingredients.length - 1 ? ", " : ""}
-                                                                </>
-                                                            ))
-                                                        ):(
-                                                            <div>Loading..</div>
-                                                        )
-                                                    }
-                                                </div>
-                                            
-                                        </div>
-                                    </div>
-                                    <div className='flex h-auto m-3' id='Process'>
-                                        <div className='w-[30%] font-semibold'>Process</div>
-                                        <div className='w-[70%] h-auto'>
-                                            <ol className='list-decimal'>
-                                                {
-                                                    MealDetails.strInstructions ? (
-                                                        MealDetails.strInstructions.map((step, index) => (
-                                                            <li key={index} className="mb-2 text-lg">
-                                                            {step}.
-                                                            </li>
-                                                        ))
-                                                    ):(
-                                                        <div>Loading</div>
-                                                    )
-                                                    
-                                                }
-                                            </ol>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
+                {/* Recipe Section */}
+                <div className="bg-[#112637] p-6 sm:p-8">
+                <div className="max-w-4xl mx-auto">
+                    <h3 className="text-lg sm:text-xl text-center font-sans mb-6 text-[#f7f0d6]">
+                    Recipe
+                    </h3>
+                    {MealDetails ? (
+                    <div className="text-[#f7f0d6] space-y-6">
+                        {/* Recipe Name */}
+                        <div className="flex flex-col sm:flex-row sm:items-center">
+                        <div className="w-full sm:w-1/3 font-semibold mb-2 sm:mb-0">
+                            Recipe Name
+                        </div>
+                        <div className="w-full sm:w-2/3">{MealDetails.strMeal}</div>
+                        </div>
+
+                        {/* Ingredients */}
+                        <div className="flex flex-col sm:flex-row sm:items-start">
+                        <div className="w-full sm:w-1/3 font-semibold mb-2 sm:mb-0">
+                            Ingredients
+                        </div>
+                        <div className="w-full sm:w-2/3">
+                            {MealDetails.ingredients ? (
+                            MealDetails.ingredients.map((step, index) => (
+                                <span key={index}>
+                                {step}
+                                {index < MealDetails.ingredients.length - 1 ? ", " : ""}
+                                </span>
+                            ))
+                            ) : (
+                            <div>Loading...</div>
+                            )}
+                        </div>
+                        </div>
+
+                        {/* Process */}
+                        <div className="flex flex-col sm:flex-row">
+                        <div className="w-full sm:w-1/3 font-semibold mb-2 sm:mb-0">
+                            Process
+                        </div>
+                        <div className="w-full sm:w-2/3">
+                            <ol className="list-decimal space-y-2 pl-5">
+                            {MealDetails.strInstructions ? (
+                                MealDetails.strInstructions.map((step, index) => (
+                                <li key={index} className="text-lg">
+                                    {step}.
+                                </li>
+                                ))
                             ) : (
                                 <div>Loading...</div>
-                            )
-                        }
+                            )}
+                            </ol>
+                        </div>
+                        </div>
                     </div>
+                    ) : (
+                    <div className="text-center text-[#f7f0d6]">Loading...</div>
+                    )}
+                </div>
                 </div>
             </main>
         </div>
+
     );
 }
 
